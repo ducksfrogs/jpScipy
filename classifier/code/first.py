@@ -40,3 +40,10 @@ clf.fit(X,y)
 
 plt.scatter(X[:,0],X[:,1], marker='o', s=50, c=y)
 plotBoundary(X, clf)
+
+
+from sklearn import linear_model
+clf = linear_model.LogisticRegression()
+
+from sklearn import svm
+clf = svm.SVC(kernel='linear', C=10)

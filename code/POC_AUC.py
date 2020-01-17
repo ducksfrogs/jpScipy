@@ -59,3 +59,44 @@ plt.xlim([-0.01, 1.01])
 plt.ylim([0.0, 1.01])
 plt.ylabel('Precision')
 plt.xlabel('Recall')
+
+
+#if random_state
+
+test_score = clf.decision_function(X_test)
+fpr, tpr, _ = roc_curve(y_test, test_score)
+plt.plot(fpr, tpr, label='result')
+print("result AUC = ", auc(fpr, tpr))
+
+test_score = np.random.uniform(size=y_test.size)
+fpr, tpr, _ = roc_curve(y_test, test_score)
+plt.plot(fpr, tpr, label="random / chance")
+print("chance AUC = ", auc(fpr, tpr))
+
+fpr, tpr, _ = roc_curve(y_test, y_test)
+plt.plot(fpr, tpr, label='perfect')
+print("prefect AUC = ", auc(fpr, tpr))
+plt.plot([0,1],[0,1], linestyle = '--')
+plt.legend(loc='best')
+plt.xlim([-0.01, 1.01])
+plt.ylim([0.0, 1.01])
+
+#Precision recall
+
+test_score = clf.decision_function(X_test)
+precision, recall, _ = precision_recall_curve(y_test, test_score)
+plt.plot(recall, precision, label="result")
+
+test_score = np.random.uniform(size=y_test.size)
+precision, recall, _ = precision_recall_curve(y_test, test_score)
+plt.plot(recall, precision, label='random')
+
+precision, recall, _ = precision_recall_curve(y_test, y_test)
+plt.plot(recall, precision, label='perfect')
+
+plt.legend(loc='best')
+
+test_score = np.random.uniform(size=y_test.size)
+precision, recall, th = precision_recall_curve(y_test, test_score)
+
+precision_interp = np.maximum.accumulate(precision)

@@ -100,3 +100,7 @@ test_score = np.random.uniform(size=y_test.size)
 precision, recall, th = precision_recall_curve(y_test, test_score)
 
 precision_interp = np.maximum.accumulate(precision)
+precision, recall, th = precision_recall_curve(y_test, )
+
+plt.plot(recall, precision, marker=".", label="precision")
+plt.plot(recall, precision_interp, marker=".", label="interped precision")
